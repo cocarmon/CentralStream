@@ -1,0 +1,55 @@
+
+.broadcastContainer_box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+.broadcastContainer_two--people {
+    width: 100%;
+    background-color: #2A2B2D;
+    color: white;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.broadcastContainer_two--people h3 {
+    font-weight: normal;
+    padding-left:10px
+}
+.broadcastContainer_two--chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    min-height: 80%;
+    width: 100%;
+    background-color: #2A2B2D;
+}
+
+.chat_input {
+    width: 100%;
+}
+
+#chatbox {
+    width: 80%;
+    outline: none;
+    height: 30px;
+}
+
+#submitChat {
+    height: 33px;
+    width: 10%;
+    background-color: #03A9F4;
+    color: white;
+    border: none;
+}
+
+#submitChat:hover {
+    cursor: pointer;
+}
+.messageClass{
+    color: white;
+    font-size: 16px;
+    background-color: #4d4e51;
+    text-align: left;
+}

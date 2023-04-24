@@ -1,0 +1,80 @@
+*{
+margin: 0px;
+    padding: 0px;
+}
+.dashboardPage{
+     width: 100vw;
+     height: 100vh;
+     color: white;
+     text-align: left;
+    overflow: hidden;
+}
+.dashboardPage > h1{
+    padding-left: 60px;
+}
+.dashboardContainer{
+    width: 100%;
+    height: 100%;
+    padding-left: 60px;
+    display: flex;
+}
+.sectionHeaders{
+    display: flex;
+    padding: 15px;
+}
+.sectionTitle{
+    padding-left: 10px;
+}
+.sectionBox{
+    width: 15px;
+    height: 15px;
+    margin-top: 5px;
+}
+.green{
+    background-color:#9DFF73;
+}
+.purple {
+    background-color: #7B76FE;
+}
+.diamond {
+    background-color: #96F7E7;
+}
+.orange{
+    background-color: #F7CE96;
+}
+.dashboardContainer_one{
+    width: 75%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.dashboardContainer_one > div{
+    margin: 10px;
+}
+.dashboardContainer_two {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.dashboardContainer_two>div {
+    margin: 10px;
+}
+
+.dashboardContainer_one--analytics{
+    display: flex;
+    height: 40%;
+    background-color: #2A2B2D;
+}
+.dashboardContainer_one--streams {
+    height: 60%;
+    background-color: #2A2B2D;
+}
+.dashboardContainer_two--notifications {
+    height: 60%;
+    background-color: #2A2B2D;
+}
+.dashboardContainer_two--schedule {
+    height: 60%;
+    background-color: #2A2B2D;
+}

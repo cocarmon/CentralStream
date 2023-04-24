@@ -1,0 +1,24 @@
+.navBar{
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    background-color:#2A2B2D ;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+
+.iconContainer{
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+.iconContainer:hover {
+    cursor: pointer;
+    background-color: #C3C3C3;
+}
+.active{
+    background-color: #C3C3C3;
+}

@@ -1,0 +1,81 @@
+.broadcastContainer{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.broadcastContainer_one{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin-top: 2%;
+}
+
+#preview{
+    width: 100%;
+    height: 100%;
+}
+.broadcastContainer_one--stream{
+    width: 90%;
+    height: 100%;
+}
+
+
+.broadcastContainer_one--buttons{
+    position: fixed;
+    left: 35%;
+    bottom: 10px;
+}
+.broadcastContainer_one--buttons > button{
+    outline: none;
+    width: 100px;
+    height: 30px;
+    border: none;
+    font-size: 20px;
+    
+}
+.broadcastContainer__two {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+}
+
+#broadcast_start:hover {
+    cursor: pointer;
+    background-color: #11CC10;
+    color: white;
+}
+
+#broadcast_end:hover {
+    cursor: pointer;
+    background-color:#CC1010;
+    color:white;
+}
+
+#shareable{
+    outline: none;
+    font-size: 20px;
+    height: 25px;
+    margin-bottom: 15px;
+    padding-top: 2px;
+    border: none;
+    outline: none;
+}
+#shareable_label{
+    background-color: #D2D2D2;
+    font-size: 20px;
+    color:black;
+    padding-bottom: 1px;
+    border: none;
+    outline: none;
+}
+
+#shareable:hover{
+    cursor: pointer;
+}
