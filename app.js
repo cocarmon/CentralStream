@@ -29,13 +29,11 @@ app.get('/', (req, res) => {
 app.use('/api/streams', streamRouter);
 app.use('/api/auth', authRouter);
 // app.use('/api/analytics', analyticsRouter);
-// app.use('*', (req, res) => {
-//   res.send(`Can Not Find ${req.originalUrl}`);
-// });
 
-// Step 1:
+// Sends static file request to the client
 app.use(express.static(path.resolve(__dirname, './client/build')));
-// Step 2:
+
+// Any unrecognized route it returns the index.html
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
