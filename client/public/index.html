@@ -5,9 +5,10 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta  http-equiv="Content-Security-Policy" 
-      content="worker-src blob:https://central-stream.herokuapp.com/99f5023b-0ea1-4161-8025-e54db6f854b3;"/>
-    <meta/>
+    <meta http-equiv="Content-Security-Policy"
+      content="default-src 'self' 'unsafe-inline'; worker-src blob: 'unsafe-inline';">
+
+    <meta
       name="description"
       content="Web site created using create-react-app"
     />
