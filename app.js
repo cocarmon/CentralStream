@@ -16,6 +16,15 @@ const authRouter = require('./routes/authRoute');
 const app = express();
 
 app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'https://*.herokuapp.com'],
+      workerSrc: ["'self'", 'blob:'],
+    },
+  }),
+);
 app.use(cors({ origin: process.env.APP_URl || 'http://localhost:3000' }));
 
 app.use(express.json());
