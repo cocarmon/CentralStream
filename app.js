@@ -22,6 +22,7 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", 'https://*.herokuapp.com'],
       workerSrc: ["'self'", 'blob:'],
+      connectSrc: ["'self'", '<URL>'],
     },
   }),
 );
