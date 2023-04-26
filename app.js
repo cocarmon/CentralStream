@@ -22,11 +22,16 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", 'https://*.herokuapp.com'],
       workerSrc: ["'self'", 'blob:'],
-      connectSrc: ["'self'", '<URL>'],
+      connectSrc: [
+        "'self'",
+        'https://broadcast.stats.live-video.net/',
+        'wss://edge.ivschat.us-east-1.amazonaws.com/',
+        'https://d431ae37b260.webrtc.live-video.net:4443/v1/offer',
+      ],
     },
   }),
 );
-app.use(cors({ origin: process.env.APP_URl || 'http://localhost:3000' }));
+app.use(cors({ origin: process.env.APP_URl || 'http://localhost:8080' }));
 
 app.use(express.json());
 

@@ -22,8 +22,7 @@ const config = require('../config/authConfig');
 const userModel = db.user;
 const channelModel = db.channel;
 
-// Get channel information: playback url,ingest point,arn
-// Used in initializing broadcast
+// Returns playback url,ingest point, and channelarn
 const getChannelInformation = async (channelArn) => {
   try {
     const getChannelCommand = new GetChannelCommand({
@@ -41,7 +40,7 @@ const getChannelInformation = async (channelArn) => {
   }
 };
 
-// StreamKey - used to identify a source of video streaming
+// Returns streamKey - used to identify a source of video streaming
 // Needed for client.startBroadcast(streamKey)
 const getStreamKey = async (streamArn, name) => {
   try {
@@ -77,11 +76,14 @@ const listKeys = async ({ arn }) => {
 // Creates link to share with viewers
 // Will have to come back and add signing this
 const generateViewLink = ({ playbackUrl, arn, ...rest }) => {
-  const publicLink = `http://${
-    process.env.APP_URL
-  }/view/?channel=${encodeURIComponent(arn)}&playbackUrl=${encodeURIComponent(
-    playbackUrl,
-  )}`;
+  const urlBase =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8080/'
+      : process.env.PROD_URL;
+  const publicLink = `http://${urlBase}/view/?channel=${encodeURIComponent(
+    arn,
+  )}&playbackUrl=${encodeURIComponent(playbackUrl)}`;
+  console.log(publicLink);
   return publicLink;
 };
 
@@ -93,7 +95,7 @@ const verifyJwt = (jwtToken) => {
   return verified;
 };
 
-// Allows users to chat
+// To join the chat room users must have a chat token
 // eslint-disable-next-line consistent-return
 exports.createChatToken = utils.catchAsync(async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -104,6 +106,7 @@ exports.createChatToken = utils.catchAsync(async (req, res, next) => {
 
   const { channelArn } = req.body;
   const tokenWithoutBearer = authHeader.replace('Bearer ', '');
+
   const {
     dataValues: { chatarn: chatArn, chatendpoint: chatEndpoint },
   } = await channelModel.findOne({
@@ -117,9 +120,7 @@ exports.createChatToken = utils.catchAsync(async (req, res, next) => {
     }
     username = userObject.dataValues.username;
   }
-  // Requires chatToken to get message events
   // There's no View_Message capability as viewers who aren't signed in shouldn't be able to chat
-  // So they have to have send_message capability, but through authorization on frontend prevents non-signed in veiwers from being able to chat
   const params = {
     attributes: {
       displayName: username,
@@ -128,7 +129,6 @@ exports.createChatToken = utils.catchAsync(async (req, res, next) => {
     roomIdentifier: chatArn,
     userId: `${resolved.id}`,
   };
-  // Creates an encrypted token that is used by a chat participant
   const command = new CreateChatTokenCommand(params);
   const data = await utils.ivsChat.send(command);
   res.status(200).json({
@@ -180,19 +180,16 @@ const createNewChannel = async () => {
   return { channelarn };
 };
 
-// Sends channel information to the broadcast component, used in initBroadcast
-exports.streamInformation = utils.catchAsync(async (req, res) => {
-  const authHeader = req.headers.authorization;
-  const tokenWithoutBearer = authHeader.replace('Bearer ', '');
-  let dataValues = await channelModel.findOne({
+// Returns open channels, if all channels are busy creates a new one
+const getOpenChannel = async () => {
+  let openChannels = await channelModel.findOne({
     where: { inuse: false },
   });
-
-  if (!dataValues) {
-    // Create a new channel
-    dataValues = await createNewChannel();
+  // Every channel is busy
+  if (!openChannels) {
+    openChannels = await createNewChannel();
   }
-  const { channelarn } = dataValues;
+  const { channelarn } = openChannels.dataValues;
 
   await channelModel.update(
     {
@@ -202,16 +199,24 @@ exports.streamInformation = utils.catchAsync(async (req, res) => {
       where: { channelarn },
     },
   );
+  return channelarn;
+};
 
+// Returns all stream information: playbackurl, streamkey,channelName, viewing link
+exports.streamInformation = utils.catchAsync(async (req, res) => {
+  const channelarn = await getOpenChannel();
   const channelInformation = await getChannelInformation(channelarn);
   // const setUserTag = await setUserIdTag(tokenWithoutBearer, channelArn);
+
   const listStreamKeys = await listKeys(channelInformation);
   const streamKey = await getStreamKey(listStreamKeys, channelInformation.name);
   channelInformation.streamKey = streamKey;
   channelInformation.viewLink = generateViewLink(channelInformation);
+
   res.status(200).json(channelInformation);
 });
 
+// Sets channel to open
 exports.releaseChannel = utils.catchAsync(async (req, res) => {
   const { arn } = req.body;
 
@@ -237,6 +242,7 @@ const eventBridgeListener = utils.catchAsync(async () => {
     endTime: 1670875200000,
   };
 });
+
 // Add Later
 // exports.createLike = async(req,res) => {};
 // exports.createTag = async (req, res) => {};
