@@ -1,0 +1,12 @@
+.videoContainer div{
+    width: 100%;
+    height: 100%;
+}
+#vjs_video_3{
+    width: 70vw;
+     height: 80vh;
+}
+.vjs-tech{
+    width: 70vw;
+    height: 80vh;
+}
