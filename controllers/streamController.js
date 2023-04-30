@@ -7,6 +7,7 @@ const {
   ListStreamKeysCommand,
   TagResourceCommand,
   CreateChannelCommand,
+  CreateStreamKeyCommand,
 } = require('@aws-sdk/client-ivs');
 
 const {
@@ -49,7 +50,6 @@ const getStreamKey = async (streamArn, name) => {
       name,
     });
     const { streamKey } = await utils.ivsClient.send(getStreamKeyCommand);
-
     return streamKey.value;
   } catch (err) {
     throw new utils.AppError(
@@ -78,12 +78,11 @@ const listKeys = async ({ arn }) => {
 const generateViewLink = ({ playbackUrl, arn, ...rest }) => {
   const urlBase =
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost:8080/'
+      ? 'http://localhost:3000/'
       : process.env.PROD_URL;
-  const publicLink = `http://${urlBase}/view/?channel=${encodeURIComponent(
+  const publicLink = `${urlBase}view/?channel=${encodeURIComponent(
     arn,
   )}&playbackUrl=${encodeURIComponent(playbackUrl)}`;
-  console.log(publicLink);
   return publicLink;
 };
 
@@ -170,14 +169,19 @@ const createNewChannel = async () => {
   const { arn: channelarn } = channelResponse.channel;
   const { arn: chatarn } = chatResponse;
   const chatendpoint = process.env.CHAT_ENDPOINT;
+  const keyParams = {
+    channelArn: channelarn,
+  };
 
+  const streamKeyCommand = await CreateStreamKeyCommand(keyParams);
+  const streamKeyResponse = await utils.ivsClient.send(streamKeyCommand);
   await channelModel.create({
     channelarn,
     chatarn,
     chatendpoint,
     inuse: true,
   });
-  return { channelarn };
+  return { dataValues: { channelarn } };
 };
 
 // Returns open channels, if all channels are busy creates a new one
@@ -185,8 +189,10 @@ const getOpenChannel = async () => {
   let openChannels = await channelModel.findOne({
     where: { inuse: false },
   });
+  console.log(openChannels);
   // Every channel is busy
   if (!openChannels) {
+    console.log('here');
     openChannels = await createNewChannel();
   }
   const { channelarn } = openChannels.dataValues;
@@ -206,9 +212,11 @@ const getOpenChannel = async () => {
 exports.streamInformation = utils.catchAsync(async (req, res) => {
   const channelarn = await getOpenChannel();
   const channelInformation = await getChannelInformation(channelarn);
+
   // const setUserTag = await setUserIdTag(tokenWithoutBearer, channelArn);
 
   const listStreamKeys = await listKeys(channelInformation);
+
   const streamKey = await getStreamKey(listStreamKeys, channelInformation.name);
   channelInformation.streamKey = streamKey;
   channelInformation.viewLink = generateViewLink(channelInformation);

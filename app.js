@@ -19,27 +19,23 @@ app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'https://*.herokuapp.com'],
-      workerSrc: ["'self'", 'blob:'],
-      connectSrc: [
+      defaultSrc: ['self'],
+      scriptSrc: [
         "'self'",
-        'https://broadcast.stats.live-video.net/',
-        'wss://edge.ivschat.us-east-1.amazonaws.com/',
-        'https://d431ae37b260.webrtc.live-video.net:4443/v1/offer',
+        'https://*.herokuapp.com',
+        'http://localhost:8080/ivs/amazon-ivs-wasmworker.min.js',
+        "'unsafe-eval'",
       ],
+      mediaSrc: ["'self'", 'blob:'],
+      workerSrc: ["'self'", 'blob:'],
+      connectSrc: ["'self'", '*'],
+      manifestSrc: ["'self'"],
     },
   }),
 );
-app.use(cors({ origin: process.env.APP_URl || 'http://localhost:8080' }));
+app.use(cors({ origin: process.env.PROD_URL || 'http://localhost:3000' }));
 
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.status(200).json({
-    status: 'Ok',
-  });
-});
 
 app.use('/api/streams', streamRouter);
 app.use('/api/auth', authRouter);
