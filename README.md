@@ -1,37 +1,39 @@
 # Central
-![Badge Name](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)
-Central is a simple and easy to use live streaming service.
 
-# Prerequisites
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)](https://central-stream.herokuapp.com/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/TheMysteriousMouse/CentralStream/node.js.yml?style=flat-square)](https://github.com/TheMysteriousMouse/CentralStream/actions)
+
+Central is a simple and easy-to-use live streaming service.
+
+## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
-* You have Node.js version 16 or higher is required to run this application. You can download  it here from the official 
-  Node.js website [Node.js](https://nodejs.org/)
-* Afer this run `npm install` in the root directory to install the server-side dependencies.
-* Next you need to install the dependencies for the client-side React app. To do this, run `npm run install-client` 
-  from the root of the directory.
-  
-# Usage:
 
-[Sign up](https://central-stream.herokuapp.com/signup) or sign-in, after this you will be greeted by a blank dashboard as you have yet to create a stream! Eventually this page will be filled with your analytics, notifications, scheduling, and live streams. On the left hand side click on the video Icon. This brings you to a page with the start button in the center, click it to start your first live stream experience with central! Underneath this livestream a link will appear, you can click the copy icon and send it out for others to join! Finally, if you end the livestream and click on the last icon it will bring you to a public panel to view all public livestreams, browse to find the ones that fit you!
+- Node.js version 16 or higher is required to run this application. You can download it from the official Node.js website [here](https://nodejs.org/).
+- Run `npm install` in the root directory to install the server-side dependencies.
+- Next, you need to install the dependencies for the client-side React app. To do this, run `npm run install-client` from the root of the directory.
 
-# Features
+## Usage
 
-* Realtime messaging and videoing
-* Live analytics
-* Public stream page for viewers
-* Stream Recording
-* Channel Pooling for scalability
-* JWT based authentication
-* Dynamic channel allocation for optimal resource utilization
+1. [Sign up](https://central-stream.herokuapp.com/signup) or sign in. After this, you will be greeted by a blank dashboard as you have yet to create a stream. Eventually, this page will be filled with your analytics, notifications, scheduling, and live streams.
+2. On the left-hand side, click on the video icon. This brings you to a page with the start button in the center. Click it to start your first live stream experience with Central!
+3. Underneath this livestream, a link will appear. You can click the copy icon and send it out for others to join!
+4. Finally, if you end the livestream and click on the last icon, it will bring you to a public panel to view all public livestreams. Browse to find the ones that fit you!
 
+## Features
 
-# Roadmap
+- Realtime messaging and videoing
+- Live analytics
+- Public stream page for viewers
+- Stream recording
+- Channel pooling for scalability
+- JWT-based authentication
+- Dynamic channel allocation for optimal resource utilization
 
-* Detailed analytics
-* Real-time alerts for new messages, video calls, and other events.
-* Multi-party hosting
-* Screen sharing
-* Scheduling
+## Roadmap
 
-
+- Detailed analytics
+- Real-time alerts for new messages, video calls, and other events
+- Multi-party hosting
+- Screen sharing
+- Scheduling
