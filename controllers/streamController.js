@@ -76,10 +76,9 @@ const listKeys = async ({ arn }) => {
 // Creates link to share with viewers
 // Will have to come back and add signing this
 const generateViewLink = ({ playbackUrl, arn, ...rest }) => {
-  const urlBase =
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000/'
-      : process.env.PROD_URL;
+  const urlBase = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/'
+    : process.env.PROD_URL;
   const publicLink = `${urlBase}view/?channel=${encodeURIComponent(
     arn,
   )}&playbackUrl=${encodeURIComponent(playbackUrl)}`;

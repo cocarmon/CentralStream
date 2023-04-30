@@ -21,15 +21,15 @@ app.use(
     directives: {
       defaultSrc: ['self'],
       scriptSrc: [
-        "'self'",
+        '\'self\'',
         'https://*.herokuapp.com',
-        'http://localhost:8080/ivs/amazon-ivs-wasmworker.min.js',
-        "'unsafe-eval'",
+        'http://localhost:3000/ivs/amazon-ivs-wasmworker.min.js',
+        '\'unsafe-eval\'',
       ],
-      mediaSrc: ["'self'", 'blob:'],
-      workerSrc: ["'self'", 'blob:'],
-      connectSrc: ["'self'", '*'],
-      manifestSrc: ["'self'"],
+      mediaSrc: ['\'self\'', 'blob:'],
+      workerSrc: ['\'self\'', 'blob:'],
+      connectSrc: ['\'self\'', '*'],
+      manifestSrc: ['\'self\''],
     },
   }),
 );
