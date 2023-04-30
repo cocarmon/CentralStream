@@ -1,5 +1,5 @@
 # Central
-[website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)
+https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F
 Central is a simple and easy to use live streaming service.
 
 # Prerequisites
