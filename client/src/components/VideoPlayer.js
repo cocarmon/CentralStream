@@ -38,14 +38,23 @@ const VideoPlayer = (props) => {
     player.on('dispose', () => {
       console.log('player will dispose');
     });
+    player.on('loadedmetadata', () => {
+      player.dimensions(player.currentWidth, player.currentHeight);
+    });
   };
   return (
     <>
       <div className="broadcastContainer">
         <div className="broadcastContainer_one">
-          <Videojs options={videoJsOptions} onReady={handlePlayerReady} />;
+          <Videojs
+            className="vjs-layout-large"
+            options={videoJsOptions}
+            onReady={handlePlayerReady}
+          />
         </div>
-        {channelArn ? <Chat channelArn={channelArn} /> : null}
+        <div className="broadcastContainer__two">
+          {channelArn ? <Chat channelArn={channelArn} /> : null}
+        </div>
       </div>
     </>
   );

@@ -3,7 +3,7 @@ html{
     padding: 0px;
 }
 body{
-  background-color: #252222;
+  background-color: #141415;
 }
 .App {
   text-align: center;
@@ -21,7 +21,7 @@ body{
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: rgba(0, 0, 0, 0.776);
   min-height: 100vh;
   display: flex;
   flex-direction: column;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import IVSBroadcastClient from 'amazon-ivs-web-broadcast';
+import copyIcon from '../assets/icons/copy.png';
 import api from './api';
 import { Chat } from './Chat';
 import './Broadcast.css';
@@ -84,40 +85,45 @@ const Broadcast = () => {
       setLiveStreamEnded(true);
     }
   };
+  const handleShareable = () => {
+    navigator.clipboard.writeText(client.viewLink);
+  };
   return (
     <div className="broadcastContainer">
       <div className="broadcastContainer_one">
         <div className="broadcastContainer_one--stream">
           {!liveStreamEnded ? <canvas id="preview" /> : null}
         </div>
-        <div className="broadcastContainer_one--buttons">
-          {client?.viewLink ? (
-            <div className="broadcast_link">
-              <label id="shareable_label" for="shareable">
-                URL:{' '}
-              </label>
-              <input
-                id="shareable"
-                name="publicLink"
-                type="text"
-                readOnly
-                value={client.viewLink}
-              />
+        {client?.viewLink ? (
+          <>
+            <div className="broadcastContainer_one--buttons">
+              <div className="broadcast_link">
+                <label id="shareable_label" for="shareable">
+                  <img
+                    id="shareableIcon"
+                    src={copyIcon}
+                    alt="Copy Icon"
+                    onClick={handleShareable}
+                  />
+                </label>
+                <input
+                  id="shareable"
+                  name="publicLink"
+                  type="text"
+                  readOnly
+                  value={client.viewLink}
+                />
+              </div>
+              <button id="broadcast_end" onClick={releaseChannel}>
+                End
+              </button>
             </div>
-          ) : null}
-          {!client ? (
-            <button id="broadcast_start" onClick={getChannelInformation}>
-              Start
-            </button>
-          ) : (
-            <button id="broadcast_end" onClick={releaseChannel}>
-              End
-            </button>
-          )}
-        </div>
-        {/* <label for="playbackUrl">Playback Url</label>
-        <input id="playbackUrl" type="text" readOnly /> */}
-        {/* <div className="broadcastContainer_one--streamSettings"></div> */}
+          </>
+        ) : (
+          <button id="broadcast_start" onClick={getChannelInformation}>
+            Start
+          </button>
+        )}
       </div>
       <div className="broadcastContainer__two">
         {client ? <Chat channelArn={client.arn} /> : null}

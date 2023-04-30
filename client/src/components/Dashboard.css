@@ -4,13 +4,13 @@ margin: 0px;
 }
 .dashboardPage{
      width: 100vw;
-     height: 100vh;
+     height: 99vh;
      color: white;
      text-align: left;
     overflow: hidden;
 }
 .dashboardPage > h1{
-    padding-left: 60px;
+    padding-left: 70px;
 }
 .dashboardContainer{
     width: 100%;
@@ -30,6 +30,8 @@ margin: 0px;
     height: 15px;
     margin-top: 5px;
 }
+
+
 .green{
     background-color:#9DFF73;
 }
@@ -43,17 +45,18 @@ margin: 0px;
     background-color: #F7CE96;
 }
 .dashboardContainer_one{
-    width: 75%;
-    height: 100%;
+    width: 75vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
 .dashboardContainer_one > div{
     margin: 10px;
 }
 .dashboardContainer_two {
-    width: 25%;
-    height: 100%;
+    width: 25vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -62,19 +65,69 @@ margin: 0px;
 }
 
 .dashboardContainer_one--analytics{
+    height: 40vh;
+    background-color: #242527;
+}
+.dashboardContainer_one--charts {
     display: flex;
-    height: 40%;
-    background-color: #2A2B2D;
+    justify-content: space-around;
+    align-items: end;
+}
+
+.dashboardContainer_one--charts div{
+    width: 225px;
+}
+
+.notification-events{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    list-style: none;
+}
+.notification-events li{
+    padding: 3px;
+    margin-left:15px;
+    margin-right:55px;
+    border-top: 2px solid grey;
+}
+.notification-events li:last-child{
+    border-bottom: 2px solid grey;
+}
+.notification-events li:hover {
+    background-color: rgba(212, 212, 215, 0.116);
+    cursor: pointer;
+}
+.deletable {
+    position: relative;
+    padding-left: 20px;
+}
+
+.deletable::after {
+    content: "x";
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding:4px;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.deletable:hover::after {
+    background-color: rgba(255, 0, 0, 0.627);
+    color: white;
 }
 .dashboardContainer_one--streams {
-    height: 60%;
-    background-color: #2A2B2D;
+    height: 60vh;
+    background-color: #242527;
 }
 .dashboardContainer_two--notifications {
-    height: 60%;
-    background-color: #2A2B2D;
+    height: 50vh;
+    background-color: #242527;
+    overflow-y: auto;
 }
 .dashboardContainer_two--schedule {
-    height: 60%;
-    background-color: #2A2B2D;
+    height: 50vh;
+    background-color: #242527;
 }
