@@ -38,26 +38,23 @@ const Broadcast = () => {
     });
 
     window.microphoneStream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-    });
-    console.log(`newClient1: ${streamConfig}`);
-    console.log(`newClient2: ${ingestEndpoint}`);
+      audio: { deviceId: window.audioDevices[0].deviceId },
+  });
+
     const newClient = IVSBroadcastClient.create({
       // Enter the desired stream configuration
       streamConfig,
       // Enter the ingest endpoint from the AWS console or CreateChannel API
       ingestEndpoint,
     });
-    console.log(`newClient3: ${newClient}`);
 
+      console.log(window.microphoneStream)
     newClient.addVideoInputDevice(window.cameraStream, 'camera1', { index: 0 }); // only 'index' is required for the position parameter
-
-    newClient.addAudioInputDevice(window.microphoneStream, 'default');
+    newClient.addAudioInputDevice(window.microphoneStream, 'mic1');
 
     // Used to send the arn back in releaseChannel
     newClient.arn = arn;
     newClient.viewLink = viewLink;
-    console.log(viewLink);
     const previewEl = document.getElementById('preview');
     newClient.attachPreview(previewEl);
     newClient.startBroadcast(streamKey);
@@ -71,7 +68,6 @@ const Broadcast = () => {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
       initBroadcast(response.data);
     }
   };

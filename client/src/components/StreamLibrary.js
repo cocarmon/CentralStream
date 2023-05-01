@@ -10,8 +10,6 @@ const StreamLibrary = () => {
         <div className="box"></div>
         <div className="box"></div>
         <div className="box"></div>
-        <div className="box"></div>
-        <div className="box"></div>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ const VideoPlayer = (props) => {
     autoplay: true,
     controls: true,
     responsive: true,
+    muted:false,
     fluid: true,
     sources: [
       {
@@ -30,24 +31,12 @@ const VideoPlayer = (props) => {
   };
   const handlePlayerReady = (player) => {
     playerRef.current = player;
-    // You can handle player events here, for example:
-    player.on('waiting', () => {
-      console.log('player is waiting');
-    });
-
-    player.on('dispose', () => {
-      console.log('player will dispose');
-    });
-    player.on('loadedmetadata', () => {
-      player.dimensions(player.currentWidth, player.currentHeight);
-    });
   };
   return (
     <>
       <div className="broadcastContainer">
         <div className="broadcastContainer_one">
           <Videojs
-            className="vjs-layout-large"
             options={videoJsOptions}
             onReady={handlePlayerReady}
           />
