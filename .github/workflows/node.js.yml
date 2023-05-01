@@ -37,7 +37,4 @@ jobs:
       run: npm run build --prefix client
 
     - name: Start server
-      run: |
-        npm start
-        npx wait-on http://localhost:8080
-#       kill $(lsof -t -i:8080) || true
+      run: npm start --prefix server --background
