@@ -172,7 +172,7 @@ const createNewChannel = async () => {
     channelArn: channelarn,
   };
 
-  const streamKeyCommand = await CreateStreamKeyCommand(keyParams);
+  const streamKeyCommand = new CreateStreamKeyCommand(keyParams);
   const streamKeyResponse = await utils.ivsClient.send(streamKeyCommand);
   await channelModel.create({
     channelarn,
@@ -188,10 +188,8 @@ const getOpenChannel = async () => {
   let openChannels = await channelModel.findOne({
     where: { inuse: false },
   });
-  console.log(openChannels);
   // Every channel is busy
   if (!openChannels) {
-    console.log('here');
     openChannels = await createNewChannel();
   }
   const { channelarn } = openChannels.dataValues;

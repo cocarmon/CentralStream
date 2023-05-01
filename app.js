@@ -22,18 +22,18 @@ app.use(
       defaultSrc: ['self'],
       scriptSrc: [
         '\'self\'',
-        'https://*.herokuapp.com',
-        'http://localhost:3000/ivs/amazon-ivs-wasmworker.min.js',
-        '\'unsafe-eval\'',
+        'wasm-unsafe-eval',
       ],
       mediaSrc: ['\'self\'', 'blob:'],
       workerSrc: ['\'self\'', 'blob:'],
-      connectSrc: ['\'self\'', '*'],
+      connectSrc: ['\'self\'', '*.live-video.net'],
       manifestSrc: ['\'self\''],
     },
   }),
 );
-app.use(cors({ origin: process.env.PROD_URL || 'http://localhost:3000' }));
+
+const corsOrigin = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.PROD_URL;
+app.use(cors({ origin: corsOrigin }));
 
 app.use(express.json());
 
