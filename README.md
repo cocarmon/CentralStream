@@ -1,7 +1,6 @@
 # Central
 
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)](https://central-stream.herokuapp.com/)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/TheMysteriousMouse/CentralStream/node.js.yml?style=flat-square)](https://github.com/TheMysteriousMouse/CentralStream/actions)
 
 Central is a simple and easy-to-use live streaming service.
 
