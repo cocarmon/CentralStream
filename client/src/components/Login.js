@@ -6,6 +6,7 @@ import './Login.css';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const signIn = (event) => {
@@ -17,14 +18,22 @@ const Login = () => {
           const token = res.data.accessToken;
           localStorage.setItem('token', token);
           navigate('/stream');
-        } else {
-          console.log(res.data.message);
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setErrorMessage('Incorrect Username or Password');
+      });
   };
   return (
     <div className="form-container">
+      <div className="errorContainer">
+        {errorMessage && (
+          <div className="redBackground">
+            <p className="error"> {errorMessage} </p>
+          </div>
+        )}
+      </div>
+
       <h1>LOGIN</h1>
       <form className="login-form" onSubmit={signIn}>
         <input
@@ -52,7 +61,7 @@ const Login = () => {
           Sign In
         </button>
       </form>
-      <a id="login-form__signUp" href="/signUp">
+      <a id="login-form__signUp" href="/signup">
         Sign Up
       </a>
     </div>

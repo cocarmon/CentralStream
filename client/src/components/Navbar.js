@@ -1,5 +1,6 @@
 import { LiveTvIcon, VideoCamerIcon, HomeIcon } from '../assets/icons/icon';
 import { Link } from 'react-router-dom';
+import DarkModeToggle from './DarkModeToggle';
 
 import './Navbar.css';
 export const Navbar = () => {
@@ -19,6 +20,9 @@ export const Navbar = () => {
         <Link to="/streamLibrary">
           <img src={LiveTvIcon} alt="House" />
         </Link>
+      </div>
+      <div>
+        <DarkModeToggle />
       </div>
     </div>
   );

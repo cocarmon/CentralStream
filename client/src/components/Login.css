@@ -23,7 +23,9 @@
     border: none;
     outline: none;
     height: 30px;
+    width: 100%;
     background-color:#D4D4D4 ;
+    text-indent: 5px;
 }
 .login-form>label{
     cursor: pointer;
@@ -45,4 +47,15 @@
 }
 #login-form__signUp{
     margin-top:10px;
+}
+.errorContainer{
+    height: 45px;
+}
+.redBackground{
+    background-color: rgba(240, 26, 26, 0.257);
+    padding: 10px;
+    height: 25px;
+}
+.error {
+    color: red;
 }

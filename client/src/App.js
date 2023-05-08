@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Broadcast from './components/Broadcast';
@@ -8,14 +9,25 @@ import { Navbar } from './components/Navbar';
 import StreamLibrary from './components/StreamLibrary';
 import VideoPlayer from './components/VideoPlayer';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
-
 function App() {
+  const [color, setColor] = useState('#141415');
+  useEffect(() => {
+    window.location.pathname === '/login' ||
+    window.location.pathname === '/signup'
+      ? setColor('#FFFFFF')
+      : setColor('#141415');
+    console.log(window.location.pathname);
+  }, []);
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: color }}>
       <BrowserRouter>
-        <Navbar />
+        {window.location.pathname === '/login' ||
+        window.location.pathname === '/signup' ? null : (
+          <Navbar />
+        )}
+
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
 
           <Route
             path="/stream"
@@ -25,7 +37,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route
             path="/dashboard"
             element={
