@@ -4,10 +4,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 90vh;
+    width: 100vw;
 }
 .form-container>h1{
     font-weight: normal;
+    color: White;
 
 }
 .login-form{
@@ -41,6 +43,9 @@
 }
 .login-form label,a{
     font-size: 14px;
+}
+.login-form__extras{
+    color: white;
 }
 .login-form label{
     padding-right: 20px;

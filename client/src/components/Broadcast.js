@@ -40,15 +40,13 @@ const Broadcast = () => {
     window.microphoneStream = await navigator.mediaDevices.getUserMedia({
       audio: true,
     });
-    console.log(`newClient1: ${streamConfig}`);
-    console.log(`newClient2: ${ingestEndpoint}`);
+
     const newClient = IVSBroadcastClient.create({
       // Enter the desired stream configuration
       streamConfig,
       // Enter the ingest endpoint from the AWS console or CreateChannel API
       ingestEndpoint,
     });
-    console.log(`newClient3: ${newClient}`);
 
     newClient.addVideoInputDevice(window.cameraStream, 'camera1', { index: 0 }); // only 'index' is required for the position parameter
 
