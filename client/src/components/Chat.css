@@ -21,7 +21,7 @@
 .broadcastContainer_two--chat {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     min-height: 80%;
     width: 100%;
     background-color: #242527;
@@ -29,7 +29,6 @@
 
 .chat_input {
     width: 100%;
-
 }
 
 #chatbox {

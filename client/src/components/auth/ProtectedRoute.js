@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import api from '../api';
 
 export const ProtectedRoute = (props) => {
@@ -16,7 +16,7 @@ export const ProtectedRoute = (props) => {
         return;
       }
       try {
-        const response = await api.get('/auth/authorize', {
+        await api.get('/auth/authorize', {
           headers: {
             authorization: `Bearer ${token}`,
           },

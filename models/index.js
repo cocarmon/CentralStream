@@ -22,7 +22,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // Intizlized to the users table in postgres
-db.user = require('./userModel.js')(sequelize, Sequelize);
+db.user = require('./userModel')(sequelize, Sequelize);
 db.channel = require('./channelModel')(sequelize, Sequelize);
 
 module.exports = db;

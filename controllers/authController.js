@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -24,12 +25,14 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = async (req, res) => {
+  console.log(req.body.username)
   try {
     const user = await User.findOne({
       where: {
         username: req.body.username,
       },
     });
+
     if (!user) {
       return res.status(404).send({ message: 'User Not found.' });
     }
@@ -49,6 +52,7 @@ exports.signin = async (req, res) => {
     const token = jwt.sign({ id: user.id }, config.secret, {
       expiresIn: 86400,
     });
+    console.log(token);
     res.status(200).send({
       id: user.id,
       username: user.username,
@@ -56,6 +60,7 @@ exports.signin = async (req, res) => {
       accessToken: token,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).send({ message: err.message });
   }
 };
