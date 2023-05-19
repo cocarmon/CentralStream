@@ -76,9 +76,10 @@ const listKeys = async ({ arn }) => {
 // Creates link to share with viewers
 // Will have to come back and add signing this
 const generateViewLink = ({ playbackUrl, arn, ...rest }) => {
-  const urlBase = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000/'
-    : process.env.PROD_URL;
+  const urlBase =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000/'
+      : process.env.PROD_URL;
   const publicLink = `${urlBase}view/?channel=${encodeURIComponent(
     arn,
   )}&playbackUrl=${encodeURIComponent(playbackUrl)}`;
@@ -86,11 +87,13 @@ const generateViewLink = ({ playbackUrl, arn, ...rest }) => {
 };
 
 const verifyJwt = (jwtToken) => {
-  const verified = jwt.verify(jwtToken, config.secret);
-  if (!verified) {
+  try {
+    const verified = jwt.verify(jwtToken, config.secret);
+
+    return verified;
+  } catch (err) {
     return new utils.AppError(401, 'Invalid or Expired token');
   }
-  return verified;
 };
 
 // To join the chat room users must have a chat token
@@ -252,3 +255,17 @@ const eventBridgeListener = utils.catchAsync(async () => {
 // exports.createLike = async(req,res) => {};
 // exports.createTag = async (req, res) => {};
 // exports.updateStreams = async (req, res) => {};
+
+exports.username = async (req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const tokenWithoutBearer = authorization.replace('Bearer ', '');
+    const { id } = verifyJwt(tokenWithoutBearer);
+
+    const { dataValues } = await userModel.findOne({ where: { id } });
+    res.status(200).json(dataValues.username);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(404);
+  }
+};

@@ -15,7 +15,7 @@ export const Navbar = () => {
   }, []);
   const getUsername = async () => {
     const jwt = localStorage.getItem('token');
-    const response = await api.get('/streams/username/', {
+    const response = await api.get('/streams/username', {
       headers: {
         authorization: `Bearer ${jwt}`,
       },
