@@ -1,9 +1,9 @@
 import './Chat.css';
 import { socket } from './WebSocket';
 import { useState, useEffect } from 'react';
-import api from '../components/api';
-import createOnMessageEvent from '../utils/onMessageEvent';
-import createWebSocket from '../utils/chatWebsocket';
+import api from '../api';
+import createOnMessageEvent from '../../utils/onMessageEvent';
+import createWebSocket from '../../utils/chatWebsocket';
 
 export const Chat = ({ channelArn }) => {
   const [numberOfViewers, setNumberOfViewers] = useState(0);
@@ -24,7 +24,7 @@ export const Chat = ({ channelArn }) => {
       socket.off('setViewerCount');
       socket.disconnect();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // Creates chat token that generates user capabilities
   // Viewers who aren't signed in won't be able to send messages

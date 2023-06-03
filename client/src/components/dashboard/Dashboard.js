@@ -5,7 +5,7 @@ import {
   AbstractIcon,
   LineIcon,
   ProgressIcon,
-} from '../assets/icons/icon';
+} from '../../assets/icons/icon';
 import LineChart from './LineChart';
 import './Dashboard.css';
 import 'chart.js/auto';

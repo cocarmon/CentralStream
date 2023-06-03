@@ -1,19 +1,19 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
-import Broadcast from './components/Broadcast';
-import { Dashboard } from './components/Dashboard';
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
+import Broadcast from './components/stream/Broadcast';
+import { Dashboard } from './components/dashboard/Dashboard';
 import { Navbar } from './components/Navbar';
 import StreamLibrary from './components/StreamLibrary';
-import VideoPlayer from './components/VideoPlayer';
+import VideoPlayer from './components/stream/VideoPlayer';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 function App() {
   const [color, setColor] = useState('#141415');
 
   return (
-    <div className="App" style={{ backgroundColor: color }}>
+    <div className="App">
       <BrowserRouter>
         {window.location.pathname === '/' ||
         window.location.pathname === '/signup' ? null : (

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import IVSBroadcastClient from 'amazon-ivs-web-broadcast';
-import copyIcon from '../assets/icons/copy.png';
-import api from './api';
+import copyIcon from '../../assets/icons/copy.png';
+import api from '../api';
 import { Chat } from './Chat';
 import './Broadcast.css';
 

@@ -1,0 +1,28 @@
+.active {
+    background: #2A2B2D !important;
+    border-bottom: 3px solid white !important;
+}
+.inactive {
+    background: #767676fe !important;
+    color: #2A2B2D !important;
+    width: 100%;
+    text-align: left !important
+}
+.login-card {
+    background: #2A2B2D;
+    padding:0px !important;
+}
+.custom-input {
+    background: #4e4e4efe !important;
+    color: white !important;
+}
+
+.custom-input:hover{
+    outline-color: white;
+    border-color: white ;
+    box-shadow: 0 0 0 0.1rem white !important;
+}
+.custom-input:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
