@@ -84,6 +84,9 @@ const Broadcast = () => {
   const handleShareable = () => {
     navigator.clipboard.writeText(client.viewLink);
   };
+  const handleRecord = async () => {
+    const recordResponse = await api.get('/streams/tag-object/');
+  };
   return (
     <div className="broadcastContainer">
       <div className="broadcastContainer_one">
@@ -112,6 +115,9 @@ const Broadcast = () => {
               </div>
               <button id="broadcast_end" onClick={releaseChannel}>
                 End
+              </button>
+              <button id="" onClick={handleRecord}>
+                Record
               </button>
             </div>
           </>

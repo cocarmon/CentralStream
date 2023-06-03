@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
+const { Upload } = require('@aws-sdk/lib-storage');
 
 const {
   GetChannelCommand,
@@ -18,6 +19,7 @@ const {
 require('dotenv').config();
 const utils = require('../utils');
 const db = require('../models');
+
 const config = require('../config/authConfig');
 
 const userModel = db.user;
@@ -267,5 +269,15 @@ exports.username = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.sendStatus(404);
+  }
+};
+
+exports.tagObject = async (req, res) => {
+  try {
+    console.log('Firing');
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
   }
 };

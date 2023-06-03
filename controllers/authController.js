@@ -25,7 +25,6 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-  console.log(req.body.username)
   try {
     const user = await User.findOne({
       where: {
@@ -52,7 +51,6 @@ exports.signin = async (req, res) => {
     const token = jwt.sign({ id: user.id }, config.secret, {
       expiresIn: 86400,
     });
-    console.log(token);
     res.status(200).send({
       id: user.id,
       username: user.username,
