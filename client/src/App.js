@@ -5,7 +5,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import Broadcast from './components/stream/Broadcast';
 import { Dashboard } from './components/dashboard/Dashboard';
-import { Navbar } from './components/Navbar';
+import { Navbar } from './components/Sidebar';
 import StreamLibrary from './components/StreamLibrary';
 import VideoPlayer from './components/stream/VideoPlayer';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
@@ -13,7 +13,7 @@ function App() {
   const [color, setColor] = useState('#141415');
 
   return (
-    <div className="App">
+    <div className="App" style={{ background: '#18191A' }}>
       <BrowserRouter>
         {window.location.pathname === '/' ||
         window.location.pathname === '/signup' ? null : (
@@ -41,7 +41,7 @@ function App() {
             }
           />
           <Route path="/view" element={<VideoPlayer />} />
-          <Route path="/streamLibrary" element={<StreamLibrary />} />
+          <Route path="/library" element={<StreamLibrary />} />
           <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </BrowserRouter>

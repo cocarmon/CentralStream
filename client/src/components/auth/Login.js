@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
 import './Login.css';
-import { setRandomFallback } from 'bcryptjs';
 
 const Login = () => {
   const [activeButton, setActiveButton] = useState('login');
@@ -78,7 +77,7 @@ const Login = () => {
     }));
   };
   return (
-    <div className="container-fluid " style={{ background: '#252222' }}>
+    <div className="container-fluid ">
       {authMessage.success === true && (
         <div className="alert alert-success position-absolute top-10 start-50 translate-middle-x mt-3">
           {authMessage.message}

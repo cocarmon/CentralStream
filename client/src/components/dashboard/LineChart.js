@@ -3,14 +3,29 @@ import { Line } from 'react-chartjs-2';
 
 const LineChart = () => {
   const data = {
-    labels: ['1', '2', '3', '4', '5', '6'],
+    labels: [
+      '',
+      'January',
+      'Febuary',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
     datasets: [
       {
         label: 'Views',
         data: [12, 19, 3, 5, 9, 14],
         fill: false,
-        borderColor: '#7B76FE',
+        borderColor: '#03A9F4',
         tension: 0.1,
+        pointBorderWidth: 2,
       },
     ],
   };

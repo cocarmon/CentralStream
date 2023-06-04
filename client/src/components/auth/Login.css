@@ -1,15 +1,15 @@
 .active {
-    background: #2A2B2D !important;
+    background: #242526 !important;
     border-bottom: 3px solid white !important;
 }
 .inactive {
     background: #767676fe !important;
-    color: #2A2B2D !important;
+    color: #242526 !important;
     width: 100%;
     text-align: left !important
 }
 .login-card {
-    background: #2A2B2D;
+    background: #242526;
     padding:0px !important;
 }
 .custom-input {

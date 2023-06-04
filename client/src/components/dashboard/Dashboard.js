@@ -1,74 +1,94 @@
-import Pie from './PieChart';
-import BarChart from './BarChart';
-import {
-  BarChartIcon,
-  AbstractIcon,
-  LineIcon,
-  ProgressIcon,
-} from '../../assets/icons/icon';
 import LineChart from './LineChart';
+import { Schedule } from './Calendar';
 import './Dashboard.css';
 import 'chart.js/auto';
 
 export const Dashboard = () => {
   return (
-    <div className="dashboardPage">
-      <h1>Dashboard</h1>
-      <div className="dashboardContainer">
-        <div className="boxContainer">
-          <div className="dashboard_box total_views">
-            <p className="box_title">Total Views</p>
-            <div className="boxChild--grouping">
-              <h1 className="box_data">394,132</h1>
-              <img className="box_icon" src={BarChartIcon}></img>
+    <div className="container-fluid">
+      <h1 className="text-move-left text-white">Dashboard</h1>
+      <div className="row">
+        <div className="card border-0 col-3 custom-card">
+          <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
+            <div className="text-move-left ">
+              <p className="card-title">Total Views</p>
+              <h3 className="card-text">394,132</h3>
             </div>
+            <i
+              className="bi bi-bar-chart-fill align-self-end "
+              style={{ fontSize: '46px', color: '#03A9F4' }}
+            ></i>
           </div>
-          <div className="dashboard_box total_hours">
-            <p className="box_title">Total Hours Streamed</p>
-            <div className="boxChild--grouping">
-              <h1 className="box_data">132</h1>
-              <img className="box_icon" src={AbstractIcon}></img>
+        </div>
+        <div className="card border-0 col-3 custom-card">
+          <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
+            <div className="text-move-left ">
+              <p className="card-title">Total Hours</p>
+              <h3 className="card-text">168</h3>
             </div>
+            <i
+              className="bi bi-clock-history align-self-end "
+              style={{ fontSize: '46px', color: '#03A9F4' }}
+            ></i>
           </div>
-          <div className="dashboard_box total_streams">
-            <p className="box_title">Number of Streams</p>
-            <div className="boxChild--grouping">
-              <h1 className="box_data">32</h1>
-              <img className="box_icon" src={LineIcon}></img>
+        </div>
+        <div className="card border-0 col-3 custom-card">
+          <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
+            <div className="text-move-left ">
+              <p className="card-title">Stream Count</p>
+              <h3 className="card-text">132</h3>
             </div>
+            <i
+              className="bi bi-check-square align-self-end "
+              style={{ fontSize: '46px', color: '#03A9F4' }}
+            ></i>
           </div>
-          <div className="dashboard_box total_subscribers">
-            <p className="box_title">Top Country</p>
-            <div className="boxChild--grouping">
-              <h1 className="box_data">1,100</h1>
-              <img className="box_icon" src={ProgressIcon}></img>
+        </div>
+        <div className="card border-0 col-3 custom-card">
+          <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
+            <div className="text-move-left ">
+              <p className="card-title">Total Country</p>
+              <h3 className="card-text">USA</h3>
+            </div>
+            <i
+              className="bi bi-globe-americas align-self-end "
+              style={{ fontSize: '46px', color: '#03A9F4' }}
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div className="row my-4 d-flex">
+        <div className="card border-0 col-8 custom-min-height custom-card">
+          <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
+            <div className="text-move-left ">
+              <p className="card-title">Recorded Streams</p>
             </div>
           </div>
         </div>
-        <div className="dashboardContainer_two--notifications">
-          <p className="box_title">Notifications</p>
-
-          <ul className="notification-events">
-            <li className="deletable">
-              Your live stream has started successfully.
-            </li>
-            <li className="deletable">
-              The recording is now available on your account for future viewing.
-            </li>
-          </ul>
-        </div>
-        <div className="dashboardContainer--recordedStreams">
-          <div className="recordedStreams--attributes">
-            <p className="box_title">Recorded Streams</p>
-            <input type="search" placeholder="Search" />
+        <div className="card border-0 col-4 custom-card">
+          <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
+            <div className="text-move-left ">
+              <p className="card-title">Notifications</p>
+            </div>
           </div>
         </div>
-
-        <div className="dashboardContainer_two--schedule">
-          <p className="box_title">Schedule</p>
+      </div>
+      <div className="row my-4">
+        <div className="card border-0 col-8 custom-min-height custom-card ">
+          <div className="card-body text-white card-background-color rounded-3 d-flex">
+            <p className="card-title ">Viewership</p>
+            <div className="col-8">
+              <LineChart />
+            </div>
+          </div>
         </div>
-        <div className="dashboardContainer_two--data">
-          <p className="box_title">Data</p>
+        <div className="card border-0 col-4 custom-card">
+          <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
+            <div className="text-move-left ">
+              <p className="card-title">Schedule</p>
+              <Schedule />
+            </div>
+          </div>
         </div>
       </div>
     </div>
