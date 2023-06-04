@@ -55,7 +55,7 @@ export const Navbar = () => {
           <ul className="nav flex-column collapse show" id="userMenu">
             <li>
               <ul
-                className="collapse show nav flex-column ms-1"
+                className="collapse nav flex-column ms-1"
                 id="submenu1"
                 data-bs-parent="#userMenu"
               >

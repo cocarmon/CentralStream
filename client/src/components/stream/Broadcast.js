@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import IVSBroadcastClient from 'amazon-ivs-web-broadcast';
-import copyIcon from '../../assets/icons/copy.png';
+import { BottomToggle } from './BottomToggle';
 import api from '../api';
 import { Chat } from './Chat';
 import './Broadcast.css';
@@ -71,59 +71,28 @@ const Broadcast = () => {
       initBroadcast(response.data);
     }
   };
-  const releaseChannel = async () => {
-    if (client) {
-      client.stopBroadcast();
-      await api.post('/streams/releaseChannel', {
-        arn: client.arn,
-      });
-      setClient(null);
-      setLiveStreamEnded(true);
-    }
-  };
-  const handleShareable = () => {
-    navigator.clipboard.writeText(client.viewLink);
-  };
-  const handleRecord = async () => {
-    const recordResponse = await api.get('/streams/tag-object/');
-  };
   return (
-    <div className="broadcastContainer">
-      <div className="broadcastContainer_one">
-        <div className="broadcastContainer_one--stream">
-          {!liveStreamEnded ? <canvas id="preview" /> : null}
+    <div className="container-fluid d-flex justify-content-center">
+      <div className="row">
+        <div className="">
+          {!liveStreamEnded ? (
+            <canvas id="preview" className="col-12 mt-2" />
+          ) : null}
         </div>
         {client?.viewLink ? (
           <>
-            <div className="broadcastContainer_one--buttons">
-              <div className="broadcast_link">
-                <label id="shareable_label" for="shareable">
-                  <img
-                    id="shareableIcon"
-                    src={copyIcon}
-                    alt="Copy Icon"
-                    onClick={handleShareable}
-                  />
-                </label>
-                <input
-                  id="shareable"
-                  name="publicLink"
-                  type="text"
-                  readOnly
-                  value={client.viewLink}
-                />
-              </div>
-              <button id="broadcast_end" onClick={releaseChannel}>
-                End
-              </button>
-              <button id="" onClick={handleRecord}>
-                Record
-              </button>
-            </div>
+            <BottomToggle
+              client={client}
+              setClient={setClient}
+              setLiveStreamEnded={setLiveStreamEnded}
+            />
           </>
         ) : (
-          <button id="broadcast_start" onClick={getChannelInformation}>
-            Start
+          <button
+            className="btn bg-success mb-5 align-self-end"
+            onClick={getChannelInformation}
+          >
+            <strong className="text-white">Start</strong>
           </button>
         )}
       </div>
