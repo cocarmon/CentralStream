@@ -10,8 +10,6 @@ import StreamLibrary from './components/StreamLibrary';
 import VideoPlayer from './components/stream/VideoPlayer';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 function App() {
-  const [color, setColor] = useState('#141415');
-
   return (
     <div className="App" style={{ background: '#18191A' }}>
       <BrowserRouter>
