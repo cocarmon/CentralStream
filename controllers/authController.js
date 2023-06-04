@@ -7,33 +7,48 @@ const config = require('../config/authConfig');
 
 const User = db.user;
 
-exports.signup = (req, res) => {
-  // Save User to Database
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8),
-  })
-    .then((user) => {
-      if (user) {
-        res.send({ message: 'User was registered successfully!' });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
-};
-
-exports.signin = async (req, res) => {
+const findUser = async (username) => {
   try {
     const user = await User.findOne({
       where: {
-        username: req.body.username,
+        username,
       },
     });
+    return user;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+exports.signup = async (req, res) => {
+  try {
+    // Create user
+    const user = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 8),
+    });
+    if (user) {
+      res
+        .status(200)
+        .json({ success: true, message: 'User Successfully Created!' });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res
+      .status(500)
+      .json({ success: false, message: 'Internal Error Please Try Again' });
+  }
+};
+
+exports.login = async (req, res) => {
+  try {
+    const { username } = req.body;
+    const user = await findUser(username);
 
     if (!user) {
-      return res.status(404).send({ message: 'User Not found.' });
+      return res
+        .status(401)
+        .json({ success: false, message: 'Invalid Username or Password' });
     }
 
     const passwordIsValid = bcrypt.compareSync(
@@ -42,23 +57,26 @@ exports.signin = async (req, res) => {
     );
 
     if (!passwordIsValid) {
-      return res.status(401).send({
+      return res.status(401).json({
         accessToken: null,
-        message: 'Invalid Password!',
+        success: false,
+        message: 'Invalid Username or Password',
       });
     }
 
     const token = jwt.sign({ id: user.id }, config.secret, {
       expiresIn: 86400,
     });
-    res.status(200).send({
+    res.status(200).json({
       id: user.id,
       username: user.username,
       email: user.email,
       accessToken: token,
     });
   } catch (err) {
-    console.log(err);
-    res.status(500).send({ message: err.message });
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong please try again later',
+    });
   }
 };
