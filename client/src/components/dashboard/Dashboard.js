@@ -1,6 +1,5 @@
 import LineChart from './LineChart';
 import { Schedule } from './Calendar';
-import './Dashboard.css';
 import 'chart.js/auto';
 
 export const Dashboard = () => {

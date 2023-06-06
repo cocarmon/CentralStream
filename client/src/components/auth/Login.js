@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
-import './Login.css';
 
 const Login = () => {
   const [activeButton, setActiveButton] = useState('login');
@@ -89,12 +88,12 @@ const Login = () => {
         </div>
       )}
       <div className="row justify-content-center align-items-center min-vh-100 ">
-        <div className="col-6 col-sm-5 col-md-5 col-lg-3 col-xl-2 login-card text-white">
+        <div className="col-6 col-sm-5 col-md-5 col-lg-3 col-xl-2 custom-login-card text-white">
           <nav className="nav mb-4">
             <div classname="col">
               <button
                 className={`nav-link text-white btn rounded-0 ${
-                  activeButton === 'login' ? 'active' : ''
+                  activeButton === 'login' ? 'custom-sign-active' : ''
                 } `}
                 onClick={() => handleButtonClick('login')}
               >
@@ -104,7 +103,7 @@ const Login = () => {
             <div className="col">
               <button
                 className={`nav-link btn rounded-0 text-white ${
-                  activeButton === 'signup' ? 'active' : ''
+                  activeButton === 'signup' ? 'custom-sign-active' : ''
                 }`}
                 onClick={() => handleButtonClick('signup')}
               >

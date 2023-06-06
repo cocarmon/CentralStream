@@ -1,4 +1,3 @@
-import './Chat.css';
 import { socket } from './WebSocket';
 import { useState, useEffect } from 'react';
 import api from '../api';

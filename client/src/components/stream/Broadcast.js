@@ -3,7 +3,6 @@ import IVSBroadcastClient from 'amazon-ivs-web-broadcast';
 import { BottomToggle } from './BottomToggle';
 import api from '../api';
 import { Chat } from './Chat';
-import './Broadcast.css';
 
 const Broadcast = () => {
   const [client, setClient] = useState(null);
@@ -89,7 +88,7 @@ const Broadcast = () => {
           </>
         ) : (
           <button
-            className="btn bg-success mb-5 align-self-end"
+            className="btn mb-5 align-self-end"
             onClick={getChannelInformation}
           >
             <strong className="text-white">Start</strong>

@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import api from './api';
-import DarkModeToggle from './DarkModeToggle';
-import './Sidebar.css';
 
 export const Navbar = () => {
+  const location = useLocation();
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
+
   useEffect(() => {
     getUsername();
   }, []);
@@ -25,6 +25,10 @@ export const Navbar = () => {
     }
     setUsername(response.data);
   };
+
+  if (location.pathname === '/login') {
+    return null;
+  }
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/');

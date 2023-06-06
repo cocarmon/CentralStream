@@ -1,26 +1,24 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
 import Login from './components/auth/Login';
-import SignUp from './components/auth/SignUp';
 import Broadcast from './components/stream/Broadcast';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { Navbar } from './components/Sidebar';
 import StreamLibrary from './components/StreamLibrary';
 import VideoPlayer from './components/stream/VideoPlayer';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+
+// Global css
+import './styles/global.css';
+
 function App() {
   return (
     <div className="App" style={{ background: '#18191A' }}>
       <BrowserRouter>
-        {window.location.pathname === '/' ||
-        window.location.pathname === '/signup' ? null : (
-          <Navbar />
-        )}
+        <Navbar />
 
         <Routes>
-          <Route path="/" element={<Login />} />
-
+          <Route path="/login" element={<Login />} />
           <Route
             path="/stream"
             element={
@@ -29,7 +27,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/signup" element={<SignUp />} />
           <Route
             path="/dashboard"
             element={

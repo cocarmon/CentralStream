@@ -1,4 +1,3 @@
-import './BottomToggle.css';
 import api from '../api';
 
 export const BottomToggle = ({ client, setClient, setLiveStreamEnded }) => {
@@ -24,7 +23,7 @@ export const BottomToggle = ({ client, setClient, setLiveStreamEnded }) => {
         <button className="btn btn-danger " onClick={releaseChannel}>
           End
         </button>
-        <div className="input-group custom-input-width mr-4">
+        <div className="input-group custom-bottomToggle-width mr-4">
           <span class="input-group-text" id="basic-addon1">
             <i className="bi bi-clipboard" onClick={handleShareable}></i>
           </span>

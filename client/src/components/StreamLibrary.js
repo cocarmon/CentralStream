@@ -1,5 +1,3 @@
-import './StreamLibrary.css';
-
 const StreamLibrary = () => {
   return (
     <div className="streamLibrary__container">
