@@ -1,9 +1,10 @@
 <h1 align="center">Central Livestream</h1>
 
-
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)](https://central-stream.herokuapp.com/)
-[![Lines of Code](https://img.shields.io/tokei/lines/github/cocarmon/CentralStream)](https://github.com/cocarmon/CentralStream)
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/cocarmon/CentralStream/node.js.yml)](https://github.com/cocarmon/CentralStream/actions/workflows/node.js.yml)
+<div style="text-align: center;">
+  [![Website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)](https://central-stream.herokuapp.com/)
+  [![Lines of Code](https://img.shields.io/tokei/lines/github/cocarmon/CentralStream)](https://github.com/cocarmon/CentralStream)
+  [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/cocarmon/CentralStream/node.js.yml)](https://github.com/cocarmon/CentralStream/actions/workflows/node.js.yml)
+</div>
 
 Central is a simple and easy-to-use live streaming service.
 
