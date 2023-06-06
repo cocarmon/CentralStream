@@ -1,10 +1,16 @@
-# Central
+<h1 align="center">Central Livestream</h1>
 
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)](https://central-stream.herokuapp.com/)
+<div align="center">
+
+  <a href="">![Website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)</a>
+  <a href="">![Lines of Code](https://img.shields.io/tokei/lines/github/cocarmon/CentralStream)</a>
+  <a href="">![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/cocarmon/CentralStream/node.js.yml)</a>
+
+</div>
 
 Central is a simple and easy-to-use live streaming service.
 
-## Prerequisites
+## Prerequisites :heavy_check_mark:
 
 Before you begin, ensure you have met the following requirements:
 
@@ -19,7 +25,7 @@ Before you begin, ensure you have met the following requirements:
 3. Underneath this livestream, a link will appear. You can click the copy icon and send it out for others to join!
 4. Finally, if you end the livestream and click on the last icon, it will bring you to a public panel to view all public livestreams. Browse to find the ones that fit you!
 
-## Features
+## Features :thumbsup:
 
 - Realtime messaging and videoing
 - Live analytics
