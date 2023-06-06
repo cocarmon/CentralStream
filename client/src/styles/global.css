@@ -215,27 +215,30 @@
     margin: 0px 20px;
 }
 
-
+.custom-chat-togggle{
+    position: relative;
+    left:0;
+}
 /* Chat css */
-.custom-slide-chat {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    /* initial position outside the viewport */
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    transition: transform 0.3s ease-in-out;
+.custom-chat-background {
+    background: #242526bb !important;
+}
+.custom-chatbox-background {
+    background: #242526d5 !important;
+}
+.custom-space{
+    margin:0px !important;
+    padding: 0px !important;
 }
 
-.custom-slide-chat.open {
-    transform: translateX(250px);
-    /* slide-in effect */
+.custom-position-bottom{
+    position: sticky !important;
+    bottom: 0;
 }
-
-.custom-slide-chat.closed {
-    transform: translateX(0);
-    /* slide-out effect */
+/* Hide the backdrop */
+.offcanvas-backdrop.show {
+    opacity: 0 !important;
+    pointer-events: none;
 }
 
 /* video css */

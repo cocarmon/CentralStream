@@ -91,12 +91,15 @@ const Broadcast = () => {
             className="btn mb-5 align-self-end"
             onClick={getChannelInformation}
           >
-            <strong className="text-white">Start</strong>
+            <strong className="text-white btn col-12 contrast-background-blue">
+              Start
+            </strong>
           </button>
         )}
       </div>
       <div className="broadcastContainer__two">
-        {client ? <Chat channelArn={client.arn} /> : null}
+        {/* {client ? <Chat channelArn={client.arn} /> : null} */}
+        <Chat />
       </div>
     </div>
   );

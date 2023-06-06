@@ -45,27 +45,67 @@ export const Chat = ({ channelArn }) => {
   };
 
   return (
-    <div className="container-fluid col-12 min-vh-100 d-flex align-items-center">
-      <div className="custom-slide-chat">
+    <>
+      <div className="container-fluid col-12 min-vh-100 d-flex align-items-center justify-content-left ">
         <button
-          className="navbar-toggler"
+          className="navbar-toggler w-100"
           type="button"
-          data-bs-toggle="collapse"
+          data-bs-toggle="offcanvas"
           data-bs-target="#streamControls"
           aria-controls="streamControls"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <i className="bi bi-arrow-bar-left text-white"></i>
+          <i className="bi bi-arrow-bar-left text-white text-left"></i>
         </button>
-        <div class="collapse navbar-collapse " id="streamControls">
-          <ul class="d-flex align-items-center justify-content-center list-unstyled">
-            <li class="nav-item"></li>
-            <li class="nav-item input-group custom-input-width "></li>
-            <li class="nav-item"></li>
-          </ul>
+      </div>
+
+      <div
+        className="offcanvas offcanvas-end d-flex flex-row custom-chat-background offcanvas-backdrop.show "
+        id="streamControls"
+      >
+        <div className="col-1 justify-self-center">
+          <button
+            className="navbar-toggler h-100"
+            type="button"
+            data-bs-dismiss="streamControls"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#streamControls"
+            aria-controls="streamControls"
+            aria-label="Close"
+          >
+            <i className="bi bi-arrow-bar-right text-white text-left"></i>
+          </button>
+        </div>
+        <div className="col-11">
+          <div className="offcanvas-header ">
+            <h4 className="offcanvas-title text-white ">Chat</h4>
+          </div>
+
+          <div className="offcanvas-body d-flex flex-column-reverse h-100">
+            <div className="card custom-chatbox-background ">
+              <div className="card-body text-white custom-space ">
+                <div class="input-group w-100 ">
+                  <input
+                    type="text"
+                    className="form-control "
+                    placeholder="Enter Message"
+                    aria-label="Enter Message"
+                    aria-describedby="button-addon2"
+                  />
+                  <button
+                    className="btn btn-outline-secondary "
+                    type="button"
+                    id="button-addon2"
+                  >
+                    Button
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
