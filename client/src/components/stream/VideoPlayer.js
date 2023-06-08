@@ -20,7 +20,7 @@ const VideoPlayer = (props) => {
     autoplay: true,
     controls: true,
     responsive: true,
-    muted:false,
+    muted: false,
     fluid: true,
     sources: [
       {
@@ -33,19 +33,14 @@ const VideoPlayer = (props) => {
     playerRef.current = player;
   };
   return (
-    <>
-      <div className="broadcastContainer">
-        <div className="broadcastContainer_one">
-          <Videojs
-            options={videoJsOptions}
-            onReady={handlePlayerReady}
-          />
-        </div>
-        <div className="broadcastContainer__two">
-          {channelArn ? <Chat channelArn={channelArn} /> : null}
-        </div>
+    <div className="container-fluid d-flex justify-content-center">
+      <div className="row">
+        <Videojs options={videoJsOptions} onReady={handlePlayerReady} />
       </div>
-    </>
+      <div className="broadcastContainer__two">
+        {channelArn ? <Chat channelArn={channelArn} /> : null}
+      </div>
+    </div>
   );
 };
 

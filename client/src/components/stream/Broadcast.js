@@ -98,8 +98,7 @@ const Broadcast = () => {
         )}
       </div>
       <div className="broadcastContainer__two">
-        {/* {client ? <Chat channelArn={client.arn} /> : null} */}
-        <Chat />
+        {client ? <Chat channelArn={client.arn} /> : null}
       </div>
     </div>
   );

@@ -88,7 +88,7 @@ const Login = () => {
         </div>
       )}
       <div className="row justify-content-center align-items-center min-vh-100 ">
-        <div className="col-6 col-sm-5 col-md-5 col-lg-3 col-xl-2 custom-login-card text-white">
+        <div className=" col-sm-5 col-md-5 col-lg-4 col-xl-3 custom-login-card  text-white">
           <nav className="nav mb-4">
             <div classname="col">
               <button
@@ -111,7 +111,12 @@ const Login = () => {
               </button>
             </div>
           </nav>
-          <h2 clasName="font-weight-normal">Login</h2>
+          {activeButton === 'login' ? (
+            <h2 clasName="font-weight-normal">Login</h2>
+          ) : (
+            <h2 clasName="font-weight-normal">Sign Up</h2>
+          )}
+
           <form className="m-4" onSubmit={handleSubmit}>
             <div className="form-group text-start">
               <label for="inputUsername">Username</label>

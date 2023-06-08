@@ -155,37 +155,41 @@ const setUserIdTag = utils.catchAsync(async (jwtToken, channelArn) => {
 
 // Creates new channel when all other channels are busy
 const createNewChannel = async () => {
-  const channelParams = {
-    name: `channel-${uuidv4()}`,
-    recordingConfigurationArn: process.env.CHANNEL_RECORDING_INFORMATION, // Same recording config for all streams
-  };
-  const chatParams = {
-    name: `room-${uuidv4()}`,
-  };
-  const channelCommand = new CreateChannelCommand(channelParams);
-  const chatCommand = new CreateRoomCommand(chatParams);
+  try {
+    const channelParams = {
+      name: `channel-${uuidv4()}`,
+      recordingConfigurationArn: process.env.CHANNEL_RECORDING_INFORMATION, // Same recording config for all streams
+    };
+    const chatParams = {
+      name: `room-${uuidv4()}`,
+    };
+    const channelCommand = new CreateChannelCommand(channelParams);
+    const chatCommand = new CreateRoomCommand(chatParams);
 
-  const [channelResponse, chatResponse] = await Promise.all([
-    await utils.ivsClient.send(channelCommand),
-    await utils.ivsChat.send(chatCommand),
-  ]);
+    const [channelResponse, chatResponse] = await Promise.all([
+      await utils.ivsClient.send(channelCommand),
+      await utils.ivsChat.send(chatCommand),
+    ]);
 
-  const { arn: channelarn } = channelResponse.channel;
-  const { arn: chatarn } = chatResponse;
-  const chatendpoint = process.env.CHAT_ENDPOINT;
-  const keyParams = {
-    channelArn: channelarn,
-  };
+    const { arn: channelarn } = channelResponse.channel;
+    const { arn: chatarn } = chatResponse;
+    const chatendpoint = process.env.CHAT_ENDPOINT;
+    const keyParams = {
+      channelArn: channelarn,
+    };
 
-  const streamKeyCommand = new CreateStreamKeyCommand(keyParams);
-  const streamKeyResponse = await utils.ivsClient.send(streamKeyCommand);
-  await channelModel.create({
-    channelarn,
-    chatarn,
-    chatendpoint,
-    inuse: true,
-  });
-  return { dataValues: { channelarn } };
+    const streamKeyCommand = new CreateStreamKeyCommand(keyParams);
+    const streamKeyResponse = await utils.ivsClient.send(streamKeyCommand);
+    await channelModel.create({
+      channelarn,
+      chatarn,
+      chatendpoint,
+      inuse: true,
+    });
+    return { dataValues: { channelarn } };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // Returns open channels, if all channels are busy creates a new one
@@ -265,7 +269,10 @@ exports.username = async (req, res) => {
     const { id } = verifyJwt(tokenWithoutBearer);
 
     const { dataValues } = await userModel.findOne({ where: { id } });
-    res.status(200).json(dataValues.username);
+    res.status(200).json({
+      success: true,
+      username: dataValues.username,
+    });
   } catch (err) {
     console.log(err);
     res.sendStatus(404);

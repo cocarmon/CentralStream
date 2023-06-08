@@ -1,4 +1,4 @@
-import { socket } from './WebSocket';
+import { socket } from '../../utils/WebSocket';
 import { useState, useEffect } from 'react';
 import api from '../api';
 import createOnMessageEvent from '../../utils/onMessageEvent';
@@ -7,24 +7,25 @@ import createWebSocket from '../../utils/chatWebsocket';
 export const Chat = ({ channelArn }) => {
   const [numberOfViewers, setNumberOfViewers] = useState(0);
 
-  // useEffect(() => {
-  //   socket.emit('getViewerCount', { channelArn });
-  //   socket.on('setViewerCount', (data) => {
-  //     setNumberOfViewers(data);
-  //   });
-  //   getChatToken(channelArn);
+  useEffect(() => {
+    socket.emit('getViewerCount', { channelArn });
+    socket.on('setViewerCount', (data) => {
+      setNumberOfViewers(data);
+    });
+    getChatToken(channelArn);
 
-  // Sets event listeners for messages, sends to websockets
-  // createOnMessageEvent();
+    // Sets event listeners for messages, sends to websockets
+    createOnMessageEvent();
 
-  // When componenent unmonts gets rid of eventlistener and closes the connection
-  // return () => {
-  //   console.log('unmount');
-  //   socket.off('setViewerCount');
-  //   socket.disconnect();
-  // };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    // When componenent unmonts gets rid of eventlistener and closes the connection
+    return () => {
+      console.log('unmount');
+      socket.off('setViewerCount');
+      socket.disconnect();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Creates chat token that generates user capabilities
   // Viewers who aren't signed in won't be able to send messages
   const getChatToken = async (channelArn) => {
@@ -40,28 +41,26 @@ export const Chat = ({ channelArn }) => {
         },
       },
     );
+    console.log('adsfadf');
     // Creates websocket with chatEndpoint and chatToken
     createWebSocket(chatInformation.data);
   };
 
   return (
-    <>
-      <div className="container-fluid col-12 min-vh-100 d-flex align-items-center justify-content-left ">
-        <button
-          className="navbar-toggler w-100"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#streamControls"
-          aria-controls="streamControls"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i className="bi bi-arrow-bar-left text-white text-left"></i>
-        </button>
-      </div>
-
+    <div className="container-fluid col-12 min-vh-100 d-flex align-items-center justify-content-left  ">
+      <button
+        className="navbar-toggler w-100"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#streamControls"
+        aria-controls="streamControls"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i className="bi bi-arrow-bar-left text-white text-left"></i>
+      </button>
       <div
-        className="offcanvas offcanvas-end d-flex flex-row custom-chat-background offcanvas-backdrop.show "
+        className="offcanvas offcanvas-end d-flex flex-row custom-chatbox-background offcanvas-backdrop.show "
         id="streamControls"
       >
         <div className="col-1 justify-self-center">
@@ -78,34 +77,34 @@ export const Chat = ({ channelArn }) => {
           </button>
         </div>
         <div className="col-11">
-          <div className="offcanvas-header ">
-            <h4 className="offcanvas-title text-white ">Chat</h4>
+          <div className="offcanvas-header text-white">
+            <h3 className="offcanvas-title">Live Viewers: {numberOfViewers}</h3>
           </div>
 
-          <div className="offcanvas-body d-flex flex-column-reverse h-100">
-            <div className="card custom-chatbox-background ">
-              <div className="card-body text-white custom-space ">
-                <div class="input-group w-100 ">
-                  <input
-                    type="text"
-                    className="form-control "
-                    placeholder="Enter Message"
-                    aria-label="Enter Message"
-                    aria-describedby="button-addon2"
-                  />
-                  <button
-                    className="btn btn-outline-secondary "
-                    type="button"
-                    id="button-addon2"
-                  >
-                    Button
-                  </button>
-                </div>
-              </div>
+          <div className="offcanvas-body min-vh-100 ">
+            <div className="custom-input-chatbox text-white align-self-end ">
+              <div className="custom-input-child"></div>
             </div>
+            <form class="input-group ml-3 custom-position-bottom  justify-content-start ">
+              <input
+                type="text"
+                id="chat-box"
+                className="form-control"
+                placeholder="Enter Message"
+                aria-label="Enter Message"
+                aria-describedby="submitChat"
+              />
+              <button
+                className="btn btn-outline-secondary "
+                type="button"
+                id="submitChat"
+              >
+                Button
+              </button>
+            </form>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

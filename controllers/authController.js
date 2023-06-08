@@ -33,7 +33,6 @@ exports.signup = async (req, res) => {
         .json({ success: true, message: 'User Successfully Created!' });
     }
   } catch (err) {
-    console.log(err.message);
     res
       .status(500)
       .json({ success: false, message: 'Internal Error Please Try Again' });
