@@ -232,7 +232,8 @@
 }
 
 .custom-position-bottom{
-    position: sticky !important;
+    position: absolute !important;
+    left:0;
     bottom: 0;
 }
 /* Hide the backdrop */
@@ -308,4 +309,25 @@
 .box:hover {
     cursor: pointer;
     padding: 3px;
+}
+
+/* Stream Library */
+.custom-card-size{
+    width: 400px !important;
+    border-radius: 3px;
+}
+.custom-border-top{
+    border-top: 2px solid white;
+    padding-bottom: 5px !important;
+}
+.custom-library-header{
+    text-align: left !important;
+    font-weight: normal;
+}
+
+
+@media(max-width: 1000px ){
+    .custom-login-card{
+        width: 1250px !important;
+    }
 }

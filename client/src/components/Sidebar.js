@@ -23,7 +23,8 @@ export const Navbar = () => {
     if (!responseOK) {
       navigate('/');
     }
-    setUsername(response.data);
+    setUsername(response.data.username);
+    console.log(username);
   };
 
   if (location.pathname === '/login') {
@@ -31,7 +32,7 @@ export const Navbar = () => {
   }
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/');
+    navigate('/login');
     window.location.reload();
   };
   return (
@@ -43,7 +44,7 @@ export const Navbar = () => {
       </div>
       <div className="ms-4 mt-2 mb-4">
         <h4 className="text-white ">
-          <span className="contrast-text-blue">Hello</span> cocarmon,
+          <span className="contrast-text-blue">Hello</span> {username},
         </h4>
       </div>
 
@@ -109,6 +110,7 @@ export const Navbar = () => {
         <button
           type="submit"
           className="btn bold text-white contrast-background-blue mb-4"
+          onClick={handleLogout}
         >
           Logout
         </button>
