@@ -1,3 +1,4 @@
+//
 const createWebSocket = ({ chatToken, chatEndpoint }) => {
   window.chatConnection = new WebSocket(chatEndpoint, chatToken);
 
@@ -8,14 +9,11 @@ const createWebSocket = ({ chatToken, chatEndpoint }) => {
   window.chatConnection.onmessage = (event) => {
     const message = JSON.parse(event.data);
     console.log(message.Content);
-    console.log(message.Sender.Attributes.displayName);
 
     // Update the UI with the incoming message
-    const chatContainer = document.querySelector(
-      '.broadcastContainer_two--chat',
-    );
+    const chatContainer = document.querySelector('.custom-input-chatbox');
     const messageEl = document.createElement('div');
-    const inputChild = document.querySelector('.chat_input');
+    const inputChild = document.querySelector('.custom-input-child');
     messageEl.classList.add('messageClass');
     messageEl.textContent = `${message.Sender.Attributes.displayName}: ${message.Content}`;
     chatContainer.insertBefore(messageEl, inputChild);
