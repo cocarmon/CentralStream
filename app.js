@@ -11,6 +11,8 @@ require('dotenv').config();
 // Routers
 const streamRouter = require('./routes/streamRoute');
 const authRouter = require('./routes/authRoute');
+const userRouter = require('./routes/userRoute');
+
 // const analyticsRouter = require('./routes/analyticsRoute');
 
 const app = express();
@@ -37,8 +39,9 @@ app.use(cors({ origin: corsOrigin }));
 
 app.use(express.json());
 
-app.use('/api/streams', streamRouter);
-app.use('/api/auth', authRouter);
+app.use('/streams', streamRouter);
+app.use('/auth', authRouter);
+app.use('/users', userRouter);
 // app.use('/api/analytics', analyticsRouter);
 
 // Sends static file request to the client
