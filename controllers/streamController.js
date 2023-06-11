@@ -1,7 +1,3 @@
-const { v4: uuidv4 } = require('uuid');
-const jwt = require('jsonwebtoken');
-const { Upload } = require('@aws-sdk/lib-storage');
-
 const {
   GetChannelCommand,
   GetStreamKeyCommand,
@@ -17,9 +13,10 @@ const {
 } = require('@aws-sdk/client-ivschat');
 
 require('dotenv').config();
+const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
 const utils = require('../utils');
 const db = require('../models');
-
 const config = require('../config/authConfig');
 
 const userModel = db.user;
@@ -115,6 +112,7 @@ exports.createChatToken = utils.catchAsync(async (req, res, next) => {
   } = await channelModel.findOne({
     where: { channelarn: channelArn },
   });
+
   if (tokenWithoutBearer) {
     resolved = verifyJwt(tokenWithoutBearer);
     const userObject = await userModel.findOne({ where: { id: resolved.id } });
@@ -178,14 +176,23 @@ const createNewChannel = async () => {
       channelArn: channelarn,
     };
 
-    const streamKeyCommand = new CreateStreamKeyCommand(keyParams);
-    const streamKeyResponse = await utils.ivsClient.send(streamKeyCommand);
+    // Adds new stream to the pool
     await channelModel.create({
       channelarn,
       chatarn,
       chatendpoint,
       inuse: true,
     });
+
+    // Check if stream key already exists for the channel
+    const existingStreamKeys = await listKeys({ arn: channelarn });
+    if (existingStreamKeys) {
+      return { dataValues: { channelarn } };
+    }
+    // If not create a new streamkey
+    const streamKeyCommand = new CreateStreamKeyCommand(keyParams);
+    const streamKeyResponse = await utils.ivsClient.send(streamKeyCommand);
+
     return { dataValues: { channelarn } };
   } catch (err) {
     console.log(err);
@@ -257,12 +264,7 @@ const eventBridgeListener = utils.catchAsync(async () => {
   };
 });
 
-// Add Later
-// exports.createLike = async(req,res) => {};
-// exports.createTag = async (req, res) => {};
-// exports.updateStreams = async (req, res) => {};
-
-exports.username = async (req, res) => {
+exports.getUsername = async (req, res) => {
   try {
     const { authorization } = req.headers;
     const tokenWithoutBearer = authorization.replace('Bearer ', '');
@@ -274,8 +276,10 @@ exports.username = async (req, res) => {
       username: dataValues.username,
     });
   } catch (err) {
-    console.log(err);
-    res.sendStatus(404);
+    res.status(404).json({
+      success: false,
+      message: 'User not found',
+    });
   }
 };
 
