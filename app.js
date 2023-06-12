@@ -22,7 +22,6 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'wasm-unsafe-eval'],
       mediaSrc: ["'self'", 'blob:'],
       workerSrc: ["'self'", 'blob:'],
       connectSrc: [
@@ -31,6 +30,7 @@ app.use(
         'wss://edge.ivschat.us-east-1.amazonaws.com',
       ],
       manifestSrc: ["'self'"],
+      scriptSrc: ["'self'", 'wasm-unsafe-eval'],
     },
   }),
 );
