@@ -4,7 +4,6 @@
 
   <a href="">![Website](https://img.shields.io/website?url=https%3A%2F%2Fcentral-stream.herokuapp.com%2F)</a>
   <a href="">![Lines of Code](https://img.shields.io/tokei/lines/github/cocarmon/CentralStream)</a>
-  <a href="">![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/cocarmon/CentralStream/node.js.yml)</a>
 
 </div>
 
@@ -20,7 +19,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## Usage
 
-1. [Sign up](https://central-stream.herokuapp.com/signup) or sign in. After this, you will be greeted by a blank dashboard as you have yet to create a stream. Eventually, this page will be filled with your analytics, notifications, scheduling, and live streams.
+1. [Sign up](https://central-stream.herokuapp.com/login) or sign in. After this, you will be greeted by a blank dashboard as you have yet to create a stream. Eventually, this page will be filled with your analytics, notifications, scheduling, and live streams.
 2. On the left-hand side, click on the video icon. This brings you to a page with the start button in the center. Click it to start your first live stream experience with Central!
 3. Underneath this livestream, a link will appear. You can click the copy icon and send it out for others to join!
 4. Finally, if you end the livestream and click on the last icon, it will bring you to a public panel to view all public livestreams. Browse to find the ones that fit you!
