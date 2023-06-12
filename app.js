@@ -21,19 +21,24 @@ app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ['self'],
-      scriptSrc: ['\'self\'', 'wasm-unsafe-eval'],
-      mediaSrc: ['\'self\'', 'blob:'],
-      workerSrc: ['\'self\'', 'blob:'],
-      connectSrc: ['\'self\'', '*.live-video.net'],
-      manifestSrc: ['\'self\''],
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'wasm-unsafe-eval'],
+      mediaSrc: ["'self'", 'blob:'],
+      workerSrc: ["'self'", 'blob:'],
+      connectSrc: [
+        "'self'",
+        '*.live-video.net',
+        'wss://edge.ivschat.us-east-1.amazonaws.com',
+      ],
+      manifestSrc: ["'self'"],
     },
   }),
 );
 
-const corsOrigin = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3000'
-  : process.env.PROD_URL;
+const corsOrigin =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : process.env.PROD_URL;
 app.use(cors({ origin: corsOrigin }));
 
 app.use(express.json());
