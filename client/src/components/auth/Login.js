@@ -20,7 +20,6 @@ const Login = () => {
       event.preventDefault();
       let endpoint = activeButton === 'login' ? '/auth/login' : '/auth/signup';
       const res = await api.post(endpoint, formData);
-      console.log(res);
       if (res.status === 200) {
         const token = res.data.accessToken;
         localStorage.setItem('token', token);
@@ -143,7 +142,7 @@ const Login = () => {
                   onChange={handleChange}
                   placeholder="Enter Email"
                   required
-                />{' '}
+                />
               </div>
             ) : (
               ''

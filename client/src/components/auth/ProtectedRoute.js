@@ -23,7 +23,7 @@ export const ProtectedRoute = (props) => {
         });
         setIsAuthenticated(true);
       } catch (err) {
-        console.error(err);
+        setIsAuthenticated(false);
       }
       setIsLoading(false);
     };
@@ -34,5 +34,5 @@ export const ProtectedRoute = (props) => {
     return <div>Loading...</div>;
   }
 
-  return isAuthenticated ? broadCastComponent : <Navigate to="/" />;
+  return isAuthenticated ? broadCastComponent : <Navigate to="/login" />;
 };
