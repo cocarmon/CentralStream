@@ -221,7 +221,7 @@
 }
 /* Chat css */
 .custom-chat-background {
-    background: #242526bb !important;
+    background: red !important;
 }
 .custom-chatbox-background {
     background: #242526d5 !important;
@@ -230,7 +230,12 @@
     margin:0px !important;
     padding: 0px !important;
 }
-
+.custom-input-chatbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
 .custom-position-bottom{
     position: absolute !important;
     left:0;
@@ -259,11 +264,10 @@
 }
 
 /* Sidebar/Navbar css */
-.sidebar-active {
+.active{
     background: #03A9F4 !important;
-    color: #2A2B2D;
+        color: #2A2B2D;
 }
-
 .sidebar-background {
     background: #242526 !important;
 }
@@ -276,9 +280,9 @@
     background: #03A9F4 !important;
 }
 
-.custom-sidebar-hover:hover {
-    background: #56c0f1cd !important;
-}
+/* .custom-sidebar-hover:hover {
+    background: #56c0f162 !important;
+} */
 
 /* Stream Library css */
 #streamLibrary_title {
@@ -311,6 +315,10 @@
     padding: 3px;
 }
 
+/* Video PLayer */
+#custom-video-player{
+    width: 100% !important;
+}
 /* Stream Library */
 .custom-card-size{
     width: 400px !important;

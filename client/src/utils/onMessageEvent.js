@@ -2,7 +2,7 @@
 const createOnMessageEvent = () => {
   const token = localStorage.getItem('token');
 
-  document.getElementById('submitChat').addEventListener('submit', () => {
+  document.getElementById('submitChat').addEventListener('click', () => {
     const msgInput = document.getElementById('chat-box');
     const payload = {
       action: 'SEND_MESSAGE',
@@ -12,7 +12,6 @@ const createOnMessageEvent = () => {
       },
     };
     try {
-      console.log(token);
       if (token) {
         window.chatConnection.send(JSON.stringify(payload));
       }

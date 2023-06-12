@@ -4,7 +4,7 @@ export const BottomToggle = ({ client, setClient, setLiveStreamEnded }) => {
   const releaseChannel = async () => {
     if (client) {
       client.stopBroadcast();
-      await api.post('/streams/releaseChannel', {
+      await api.post('/streams/release-channel', {
         arn: client.arn,
       });
       setClient(null);
@@ -15,7 +15,7 @@ export const BottomToggle = ({ client, setClient, setLiveStreamEnded }) => {
     navigator.clipboard.writeText(client.viewLink);
   };
   const handleRecord = async () => {
-    const recordResponse = await api.get('/streams/tag-object/');
+    const recordResponse = await api.get('/streams/tag');
   };
   return (
     <div className="container-fluid">

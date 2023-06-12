@@ -47,7 +47,6 @@ const Broadcast = () => {
       ingestEndpoint,
     });
 
-    console.log(window.microphoneStream);
     newClient.addVideoInputDevice(window.cameraStream, 'camera1', { index: 0 }); // only 'index' is required for the position parameter
     newClient.addAudioInputDevice(window.microphoneStream, 'mic1');
 
@@ -62,7 +61,7 @@ const Broadcast = () => {
   const getChannelInformation = async () => {
     if (!client) {
       const token = localStorage.getItem('token');
-      const response = await api.get('/streams/getStreamInformation/', {
+      const response = await api.get('/streams/information', {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -75,7 +74,7 @@ const Broadcast = () => {
       <div className="row">
         <div className="">
           {!liveStreamEnded ? (
-            <canvas id="preview" className="col-12 mt-2" />
+            <canvas id="preview" className="col-12 col-md-11 mt-2" />
           ) : null}
         </div>
         {client?.viewLink ? (

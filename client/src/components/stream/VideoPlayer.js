@@ -33,8 +33,8 @@ const VideoPlayer = (props) => {
     playerRef.current = player;
   };
   return (
-    <div className="container-fluid d-flex justify-content-center">
-      <div className="row">
+    <div className="container-fluid d-flex justify-content-center align-items-center">
+      <div className="row m-0 w-100 h-100">
         <Videojs options={videoJsOptions} onReady={handlePlayerReady} />
       </div>
       <div className="broadcastContainer__two">

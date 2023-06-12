@@ -19,7 +19,6 @@ export const Chat = ({ channelArn }) => {
 
     // When componenent unmonts gets rid of eventlistener and closes the connection
     return () => {
-      console.log('unmount');
       socket.off('setViewerCount');
       socket.disconnect();
     };
@@ -31,7 +30,7 @@ export const Chat = ({ channelArn }) => {
   const getChatToken = async (channelArn) => {
     const token = localStorage.getItem('token');
     const chatInformation = await api.post(
-      '/streams/createChatToken',
+      '/streams/chat-tokens',
       {
         channelArn,
       },
@@ -41,7 +40,6 @@ export const Chat = ({ channelArn }) => {
         },
       },
     );
-    console.log('adsfadf');
     // Creates websocket with chatEndpoint and chatToken
     createWebSocket(chatInformation.data);
   };
@@ -82,8 +80,8 @@ export const Chat = ({ channelArn }) => {
           </div>
 
           <div className="offcanvas-body min-vh-100 ">
-            <div className="custom-input-chatbox text-white align-self-end ">
-              <div className="custom-input-child"></div>
+            <div className="custom-input-chatbox text-white">
+              <div className="custom-input-child "></div>
             </div>
             <form class="input-group ml-3 custom-position-bottom  justify-content-start ">
               <input

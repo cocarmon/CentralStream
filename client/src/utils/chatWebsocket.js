@@ -1,14 +1,12 @@
 //
 const createWebSocket = ({ chatToken, chatEndpoint }) => {
   window.chatConnection = new WebSocket(chatEndpoint, chatToken);
-
   window.chatConnection.onopen = (event) => {
-    console.log('WebSocket connection opened.');
+    console.log(event);
   };
 
   window.chatConnection.onmessage = (event) => {
     const message = JSON.parse(event.data);
-    console.log(message.Content);
 
     // Update the UI with the incoming message
     const chatContainer = document.querySelector('.custom-input-chatbox');
