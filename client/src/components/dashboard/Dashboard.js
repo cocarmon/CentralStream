@@ -11,7 +11,7 @@ export const Dashboard = () => {
           <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
             <div className="text-move-left ">
               <p className="card-title">Total Views</p>
-              <h3 className="card-text">394,132</h3>
+              <h3 className="card-text">0</h3>
             </div>
             <i
               className="bi bi-bar-chart-fill align-self-end "
@@ -23,7 +23,7 @@ export const Dashboard = () => {
           <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
             <div className="text-move-left ">
               <p className="card-title">Total Hours</p>
-              <h3 className="card-text">168</h3>
+              <h3 className="card-text">0</h3>
             </div>
             <i
               className="bi bi-clock-history align-self-end "
@@ -35,7 +35,7 @@ export const Dashboard = () => {
           <div className="card-body text-white card-background-color rounded-3 d-flex justify-content-between">
             <div className="text-move-left ">
               <p className="card-title">Stream Count</p>
-              <h3 className="card-text">132</h3>
+              <h3 className="card-text">0</h3>
             </div>
             <i
               className="bi bi-check-square align-self-end "

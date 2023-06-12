@@ -285,10 +285,8 @@ exports.getUsername = async (req, res) => {
 
 exports.tagObject = async (req, res) => {
   try {
-    console.log('Firing');
     res.sendStatus(200);
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 };

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -10,33 +10,40 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUsername();
+    if (location.pathname === '/dashboard' || location.pathname === '/stream')
+      getUsername();
   }, []);
+
   const getUsername = async () => {
-    const jwt = localStorage.getItem('token');
-    const response = await api.get('/streams/username', {
-      headers: {
-        authorization: `Bearer ${jwt}`,
-      },
-    });
-    let responseOK = response && response.status === 200;
-    if (!responseOK) {
-      navigate('/');
+    try {
+      const jwt = localStorage.getItem('token');
+      const response = await api.get('/users/username', {
+        headers: {
+          authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      setUsername(response.data.username);
+    } catch (err) {
+      navigate('/login');
     }
-    setUsername(response.data.username);
-    console.log(username);
   };
 
-  if (location.pathname === '/login') {
-    return null;
-  }
   const handleLogout = () => {
     localStorage.removeItem('token');
+    setUsername('');
     navigate('/login');
-    window.location.reload();
   };
+
+  if (location.pathname === '/login' || location.pathname === '/404') {
+    return null;
+  }
+
   return (
-    <div className="col-2 col-sm-2 d-flex min-vh-100 flex-column text-start sidebar-background">
+    <div
+      className="col-2 col-sm-2 d-flex min-vh-100 flex-column text-start sidebar-background"
+      id="sidebarElements"
+    >
       <div className="ms-4">
         <h2 className=" mt-3 text-white">
           Central <i className="bi bi-bounding-box"></i>
@@ -44,12 +51,16 @@ export const Navbar = () => {
       </div>
       <div className="ms-4 mt-2 mb-4">
         <h4 className="text-white ">
-          <span className="contrast-text-blue">Hello</span> {username},
+          {username ? (
+            <span className="contrast-text-blue">Hello {username}</span>
+          ) : (
+            ''
+          )}
         </h4>
       </div>
 
       <ul className="nav nav-pills flex-column ms-4 ">
-        <li className="nav-item sidebar-active ">
+        <li className="nav-item ">
           <a
             className="nav-link text-white"
             data-bs-toggle="collapse"
@@ -57,63 +68,72 @@ export const Navbar = () => {
           >
             <i className="bi bi-dpad-fill"></i> Account
           </a>
-          <ul className="nav flex-column collapse show" id="userMenu">
-            <li>
-              <ul
-                className="collapse nav flex-column ms-1"
-                id="submenu1"
-                data-bs-parent="#userMenu"
-              >
-                <li>
-                  <Link to="/profile" className="nav-link text-white">
-                    <i className="bi bi-person-circle"></i> Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/settings" className="nav-link text-white">
-                    <i className="bi bi-gear-fill me-2"></i> Settings
-                  </Link>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <div className="collapse" id="userMenu">
+            <ul className="nav flex-column ms-3">
+              <li>
+                <NavLink
+                  activeClassName="sidebar-active"
+                  to="/profile"
+                  className="nav-link text-white custom-sidebar-hover"
+                >
+                  <i className="bi bi-person-circle"></i> Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  activeClassName="sidebar-active"
+                  to="/settings"
+                  className="nav-link text-white custom-sidebar-hover"
+                >
+                  <i className="bi bi-gear-fill me-2"></i> Settings
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         </li>
 
         <li className="nav-item">
-          <Link
+          <NavLink
+            activeClassName="sidebar-active"
             to="/dashboard"
-            className="nav-link text-white custom-sidebar-hover rounded-0"
+            className="nav-link text-white custom-sidebar-hover"
           >
             <i className="bi bi-bar-chart-fill"></i> Dashboard
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link
+          <NavLink
+            activeClassName="active"
             to="/stream"
-            className="nav-link text-white custom-sidebar-hover rounded-0"
+            className="nav-link text-white custom-sidebar-hover "
           >
             <i className="bi bi-cast"></i> Live Stream
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link
+          <NavLink
+            activeClassName="sidebar-active"
             to="/library"
             href="#"
-            className="nav-link text-white custom-sidebar-hover rounded-0"
+            className="nav-link text-white custom-sidebar-hover "
           >
             <i className="bi bi-collection-fill"></i> Library
-          </Link>
+          </NavLink>
         </li>
       </ul>
 
       <div className="mt-auto text-center">
-        <button
-          type="submit"
-          className="btn bold text-white contrast-background-blue mb-4"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+        {username ? (
+          <button
+            type="submit"
+            className="btn bold text-white contrast-background-blue mb-4"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
